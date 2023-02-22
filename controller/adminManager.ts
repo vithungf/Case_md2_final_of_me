@@ -22,13 +22,15 @@ export class AdminManager {
         AdminManager.UserList.push(newUser)
     }
 
-    static findById(id: string): number {
+    static findById(id: string) :any {
         for (let i in AdminManager.UserList) {
             if (id == AdminManager.UserList[i].getId()) {
                 return +i
             }
         }
         return -1
+     
+        
     }
 
     static deleteUser(id: string) {
@@ -49,20 +51,21 @@ export class AdminManager {
         }
     }
 
-    static IsLock(id: string, isLock: boolean): void {
-        let index = this.findById(id);
-        if (index !== -1) { // Kiểm tra xem tài khoản có tồn tại trong danh sách hay không
-            let user = AdminManager.UserList[index];
-            if (isLock) {
-                user.isLock = true; // Khóa tài khoản
-            } else {
-                AdminManager.UserList[index] = undefined; // Xóa tài khoản khỏi danh sách
-            }
-        }
-    }
+    // static IsLock(id: string, isLock: boolean): void {
+    //     let index = this.findById(id);
+    //     if (index !== -1) { // Kiểm tra xem tài khoản có tồn tại trong danh sách hay không
+    //         let user = AdminManager.UserList[index];
+    //         if (isLock) {
+    //             user.isLock = true; // Khóa tài khoản
+    //         } else {
+    //             AdminManager.UserList[index] = undefined; // Xóa tài khoản khỏi danh sách
+    //         }
+    //     }
+    // }
 
-    static checkLogin(id: string, password: string): number {
-        let checkID = this.findById(id);
+    static checkLogin(id: string, password: string): any {
+    
+        let checkID = this.findById(id);      
         let notExist = -1
         if (checkID !== notExist) {
             for (let i in AdminManager.UserList[checkID]) {

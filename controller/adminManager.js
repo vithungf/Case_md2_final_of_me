@@ -42,18 +42,17 @@ var AdminManager = /** @class */ (function () {
             AdminManager.UserList[index] = updateUser;
         }
     };
-    AdminManager.IsLock = function (id, isLock) {
-        var index = this.findById(id);
-        if (index !== -1) { // Kiểm tra xem tài khoản có tồn tại trong danh sách hay không
-            var user = AdminManager.UserList[index];
-            if (isLock) {
-                user.isLock = true; // Khóa tài khoản
-            }
-            else {
-                AdminManager.UserList[index] = undefined; // Xóa tài khoản khỏi danh sách
-            }
-        }
-    };
+    // static IsLock(id: string, isLock: boolean): void {
+    //     let index = this.findById(id);
+    //     if (index !== -1) { // Kiểm tra xem tài khoản có tồn tại trong danh sách hay không
+    //         let user = AdminManager.UserList[index];
+    //         if (isLock) {
+    //             user.isLock = true; // Khóa tài khoản
+    //         } else {
+    //             AdminManager.UserList[index] = undefined; // Xóa tài khoản khỏi danh sách
+    //         }
+    //     }
+    // }
     AdminManager.checkLogin = function (id, password) {
         var checkID = this.findById(id);
         var notExist = -1;

@@ -38,7 +38,9 @@ var MainMenu = /** @class */ (function () {
                         }
                         var indexOfID = adminManager_1.AdminManager.findById(inputID);
                         var user1 = 1;
-                        var checkRole = adminManager_1.AdminManager.UserList[indexOfID].getRole();
+                        // console.log(checkRole);
+                        // console.log(123);
+                        var checkRole = adminManager_1.AdminManager.UserList[indexOfID].role;
                         if (checkRole == user1) {
                             userMenu.userMenu();
                         }

@@ -40,8 +40,16 @@ export class MainMenu {
                         }
                     }
                     let indexOfID = AdminManager.findById(inputID)
+                
                     let user1 = 1
-                    let checkRole = AdminManager.UserList[indexOfID].getRole();
+                      
+            
+                        // console.log(checkRole);
+                        
+                        // console.log(123);
+                        
+                        
+                    let checkRole = AdminManager.UserList[indexOfID].role;
                     if (checkRole == user1) {
                         userMenu.userMenu()
                     } else {

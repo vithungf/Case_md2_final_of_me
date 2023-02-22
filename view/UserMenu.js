@@ -29,7 +29,7 @@ var UserMenu = /** @class */ (function () {
                     console.table(productManager_1.ProductManager.listProducts);
                     break;
                 case 2:
-                    var inputID = readlineSync.question('id item: ');
+                    var inputID = readlineSync.question('id item to cart: ');
                     var isLoop = true;
                     while (isLoop) {
                         isIdExistProduct = indexProduct = productManager_1.ProductManager.findById(inputID);
@@ -75,7 +75,7 @@ var UserMenu = /** @class */ (function () {
                         var indexSupply = productManager_1.ProductManager.findById(inputId);
                         var notExist = -1;
                         if (indexCart_1 == notExist) {
-                            console.log('{!!} This item is not exist in cart. Please try again');
+                            console.log('{!!} This item is not exist in cart. please try again');
                             break;
                         }
                         else {

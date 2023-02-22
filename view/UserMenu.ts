@@ -37,7 +37,7 @@ export class UserMenu {
                     console.table(ProductManager.listProducts)
                     break;
                 case 2:
-                    let inputID = readlineSync.question('id item: ')
+                    let inputID = readlineSync.question('id item to cart: ')
                     let isLoop = true;
                     while(isLoop){
                         isIdExistProduct = indexProduct = ProductManager.findById(inputID)
@@ -80,7 +80,7 @@ export class UserMenu {
                         let indexSupply = ProductManager.findById(inputId);
                         let notExist = -1;
                         if (indexCart == notExist) {
-                            console.log('{!!} This item is not exist in cart. Please try again');
+                            console.log('{!!} This item is not exist in cart. please try again');
                             break;
                         } else {
                             let inputQuantity = +readlineSync.question('Quantity: ');

@@ -16,10 +16,20 @@ export class AdminMenu {
 
     adminMenu() {
         let logout = new MainMenu();
-
         while (true) {
             console.log(this.menu);
             let choice = +readlineSync.question('Pick your choice: ');
+
+            let inCorrectChoice: any
+            let correctChoice: any
+
+            inCorrectChoice = choice <= 0 || choice >= 4
+            correctChoice = choice >= 1 || choice <= 3
+            
+            if(inCorrectChoice){
+                console.log('{!!} wrong choice, please try again ')
+            }else{
+
             switch (choice) {
                 case 1:
                     this.adminMenuUserManager.adminMenuManager();
@@ -30,6 +40,7 @@ export class AdminMenu {
                 case 3:
                     return logout.mainMenu;
             }
+        }
         }
     }
 }

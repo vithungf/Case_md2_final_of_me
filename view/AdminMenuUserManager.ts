@@ -10,7 +10,7 @@ import {IdValidate, PasswordValidate} from "../controller/AccountValidate";
 export class AdminMenuUserManager {
     menu: string = `
     ----------*User Manager*----------
-    1. show list user
+    1.Show list user
     2.Add user 
     3.edit user
     4.remove user
@@ -29,7 +29,14 @@ export class AdminMenuUserManager {
         let idValidate = new IdValidate();
         let passwordValidate = new PasswordValidate();
         let isLoopPassword = true
+        let inCorrectChoice: any 
+        let correctChoice : any
 
+        inCorrectChoice = choice <= 0 || choice >=6
+        correctChoice = choice >=1 || choice <= 5
+        if (inCorrectChoice){
+            console.log('{!!}wrong choice, please try again')
+        }else if(correctChoice){
         switch (choice) {
             case 1:
                 console.table(AdminManager.UserList)
@@ -108,7 +115,8 @@ export class AdminMenuUserManager {
                     break;
                 }
             case 5:
-                return back.adminMenu
+                 back.adminMenu
         }
+    }
     }
 }

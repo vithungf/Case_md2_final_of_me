@@ -32,7 +32,7 @@ export class AdminMenuProductManager {
             inCorrectChoice = choice <= 0 || choice >= 7;
             correctChoice = choice => 1 || choice <= 6;
             if (inCorrectChoice) {
-                console.log('{!!}wrong choice,pls choice again ')
+                console.log('{!!}wrong choice,please try again ')
             } else {
                 switch (choice) {
                     case 1:

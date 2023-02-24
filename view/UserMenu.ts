@@ -1,11 +1,10 @@
-import {MainMenu} from "./MainMenu";
 
 var readlineSync = require('readline-sync');
 
 import {product} from "../model/product";
 import {ProductManager} from "../controller/productManager";
 import {UserCart} from "../controller/UserCart";
-// import {MainMenu} from "./MainMenu";
+import {MainMenu} from "./MainMenu";
 
 export class UserMenu {
 
@@ -15,7 +14,7 @@ export class UserMenu {
     menu = `
     ------*user menu*--------
     1.show list
-    2.add item
+    2.add item to cart
     3.show cart 
     4.edit cart
     5 pay cart
@@ -31,13 +30,21 @@ export class UserMenu {
         while (true){
             console.log(this.menu)
             let choice = +readlineSync.question('-pick your choice-:')
+            let inCorrectChoice : any
+            let correctChoice : any
+
+            inCorrectChoice = choice <= 0 || choice >=7
+            correctChoice = choice >= 1 || choice <= 6
+            if(inCorrectChoice){
+                console.log('{!!}wrong choice, please try again');
+            }else{
             switch(choice){
                 case 1:
                     // let product = new ProductManager()
                     console.table(ProductManager.listProducts)
                     break;
                 case 2:
-                    let inputID = readlineSync.question('id item to cart: ')
+                    let inputID = readlineSync.question('id item: ')
                     let isLoop = true;
                     while(isLoop){
                         isIdExistProduct = indexProduct = ProductManager.findById(inputID)
@@ -52,7 +59,7 @@ export class UserMenu {
                                 if (isIdExistCart){
                                     let itemProduct: any = ProductManager.checkQuantity(inputID)
                                     if (inputQuantity> itemProduct){
-                                        console.log('{!!}Storage is not enough. Please try again')
+                                        console.log('{!!}amount is not enough. Please try again')
                                         break;
                                     }else{
                                         this.addItemNoExistCart(inputID,inputQuantity,indexProduct)
@@ -61,7 +68,7 @@ export class UserMenu {
                                     }
                                 }else{
                                     this.addItemExistCart(indexCart,inputQuantity,indexProduct)
-                                    console.log('-=* add item to cart successfully *=-')
+                                    console.log('-=* add item to cart success *=-')
                                     isLoop2 = false
                                 }
                             }
@@ -102,14 +109,15 @@ export class UserMenu {
                     }
                     break;
                 case 5:
-                    console.log('$' +this.userCart.bill())
-                    console.log('-=* payment done, thanks *=-')
+                    console.log('total:$' +this.userCart.bill())
+                    console.log(('-=* payment done, thanks *=-'))
                     break;
                 case 6:
 
                     return this.logout.mainMenu()
             }
         }
+    }
     }
 
     private addItemNoExistCart(inputID: string, inputQuantity: number, indexProduct: number) {

@@ -3,6 +3,5 @@ export interface iuser {
     name: string;
     password: string;
     role: number;
-    isLock : boolean;
 
 }

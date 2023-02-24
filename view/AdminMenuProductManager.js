@@ -26,7 +26,7 @@ var AdminMenuProductManager = /** @class */ (function () {
             inCorrectChoice = choice <= 0 || choice >= 7;
             correctChoice = function (choice) { return 1 || choice <= 6; };
             if (inCorrectChoice) {
-                console.log('{!!}wrong choice,pls choice again ');
+                console.log('{!!}wrong choice,please try again ');
             }
             else {
                 switch (choice) {

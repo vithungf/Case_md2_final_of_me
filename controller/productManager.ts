@@ -8,10 +8,10 @@ static listProducts: product[] = [];
 
     constructor(){
         ProductManager.listProducts.push(new product('s001', 'hoa tươi', 1000, 100))
-        ProductManager.listProducts.push(new product('s002', 'thịt', 500, 1000))
-        ProductManager.listProducts.push(new product('s003', 'cam', 10, 2000))
-        ProductManager.listProducts.push(new product('s004', 'vàng', 2000, 50))
-        ProductManager.listProducts.push(new product('s005', 'kẹo ', 5, 10000))
+        ProductManager.listProducts.push(new product('s002', 'thịt', 500, 100))
+        ProductManager.listProducts.push(new product('s003', 'cam', 10, 200))
+        ProductManager.listProducts.push(new product('s004', 'táo', 2000, 50))
+        ProductManager.listProducts.push(new product('s005', 'kẹo ', 5, 1000))
     }
      showList():product[] {
         return ProductManager.listProducts;

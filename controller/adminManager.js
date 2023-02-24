@@ -10,6 +10,8 @@ var AdminManager = /** @class */ (function () {
         AdminManager.UserList.push(new user_1.User('hung13', 'Hung3', '123', 1));
         AdminManager.UserList.push(new user_1.User('hung12', 'Hung4', '123', 1));
         AdminManager.UserList.push(new user_1.User('lekhuyen1508', 'lệ khuyên', '123', 1));
+        // role = 0 => admin
+        // role = 1 => user
     }
     AdminManager.showListUser = function () {
         return AdminManager.UserList;

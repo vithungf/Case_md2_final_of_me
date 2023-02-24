@@ -16,15 +16,24 @@ var AdminMenu = /** @class */ (function () {
         while (true) {
             console.log(this.menu);
             var choice = +readlineSync.question('Pick your choice: ');
-            switch (choice) {
-                case 1:
-                    this.adminMenuUserManager.adminMenuManager();
-                    break;
-                case 2:
-                    this.adminMenuSupplyManager.AdminMenuProductManager();
-                    break;
-                case 3:
-                    return logout.mainMenu;
+            var inCorrectChoice = void 0;
+            var correctChoice = void 0;
+            inCorrectChoice = choice <= 0 || choice >= 4;
+            correctChoice = choice >= 1 || choice <= 3;
+            if (inCorrectChoice) {
+                console.log('{!!} wrong choice, please try again ');
+            }
+            else {
+                switch (choice) {
+                    case 1:
+                        this.adminMenuUserManager.adminMenuManager();
+                        break;
+                    case 2:
+                        this.adminMenuSupplyManager.AdminMenuProductManager();
+                        break;
+                    case 3:
+                        return logout.mainMenu;
+                }
             }
         }
     };

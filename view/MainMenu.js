@@ -15,46 +15,55 @@ var MainMenu = /** @class */ (function () {
             var inputID = '';
             var inputPassword = '';
             var choice = 0;
+            var inCorrectChoice;
+            var correctChoice;
             while (isLoop) {
                 console.log(_this.menu);
                 choice = +readlineSync.question('enter your choice:');
-                switch (choice) {
-                    case 1:
-                        var adminMenu = new AdminMenu_1.AdminMenu;
-                        var userMenu = new UserMenu_1.UserMenu;
-                        var isLoop1 = true;
-                        while (isLoop1) {
-                            inputID = readlineSync.question('User Name(ID):');
-                            inputPassword = readlineSync.question('password:');
-                            var checkLogin = adminManager_1.AdminManager.checkLogin(inputID, inputPassword);
-                            var idUnavailable = -1;
-                            if (checkLogin == idUnavailable) {
-                                console.log('{!!}this id is unavailable,please try again');
+                inCorrectChoice = choice <= 0 || choice >= 4;
+                correctChoice = choice >= 1 || choice <= 3;
+                if (inCorrectChoice) {
+                    console.log(' {!!}wrong choice please try again');
+                }
+                else {
+                    switch (choice) {
+                        case 1:
+                            var adminMenu = new AdminMenu_1.AdminMenu;
+                            var userMenu = new UserMenu_1.UserMenu;
+                            var isLoop1 = true;
+                            while (isLoop1) {
+                                inputID = readlineSync.question('User Name(ID):');
+                                inputPassword = readlineSync.question('password:');
+                                var checkLogin = adminManager_1.AdminManager.checkLogin(inputID, inputPassword);
+                                var idUnavailable = -1;
+                                if (checkLogin == idUnavailable) {
+                                    console.log('{!!}wrong id or password,please try again');
+                                }
+                                else {
+                                    console.log('-=*login success*= -');
+                                    isLoop1 = false;
+                                }
+                            }
+                            var indexOfID = adminManager_1.AdminManager.findById(inputID);
+                            var user1 = 1;
+                            // console.log(checkRole);
+                            // console.log(123);
+                            var checkRole = adminManager_1.AdminManager.UserList[indexOfID].role;
+                            if (checkRole == user1) {
+                                userMenu.userMenu();
                             }
                             else {
-                                console.log('-=*login success*= -');
-                                isLoop1 = false;
+                                adminMenu.adminMenu();
                             }
-                        }
-                        var indexOfID = adminManager_1.AdminManager.findById(inputID);
-                        var user1 = 1;
-                        // console.log(checkRole);
-                        // console.log(123);
-                        var checkRole = adminManager_1.AdminManager.UserList[indexOfID].role;
-                        if (checkRole == user1) {
-                            userMenu.userMenu();
-                        }
-                        else {
-                            adminMenu.adminMenu();
-                        }
-                        break;
-                    case 2:
-                        var register = new register_1.Register;
-                        var newUser = register.register();
-                        adminManager_1.AdminManager.addUser(newUser);
-                        break;
-                    case 3:
-                        return false;
+                            break;
+                        case 2:
+                            var register = new register_1.Register;
+                            var newUser = register.register();
+                            adminManager_1.AdminManager.addUser(newUser);
+                            break;
+                        case 3:
+                            return false;
+                    }
                 }
             }
         };

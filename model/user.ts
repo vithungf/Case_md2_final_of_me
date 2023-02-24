@@ -5,14 +5,12 @@ export class User implements iuser{
     name:string;
     password:string;
     role:number;
-    isLock : boolean
 
-    constructor(id:string, name:string, password:string, role:number = 1,isLock = false){
+    constructor(id:string, name:string, password:string, role:number = 1){
         this.id = id;
         this.name = name;
         this.password = password;
         this.role = role;
-        this.isLock = isLock;
     }
 
 
@@ -29,7 +27,5 @@ export class User implements iuser{
     getRole():number {
         return this.role;
     }
-    getIsLock():boolean {
-        return this.isLock;
-    }
+   
 }

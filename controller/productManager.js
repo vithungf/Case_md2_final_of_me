@@ -5,10 +5,10 @@ var product_1 = require("../model/product");
 var ProductManager = /** @class */ (function () {
     function ProductManager() {
         ProductManager.listProducts.push(new product_1.product('s001', 'hoa tươi', 1000, 100));
-        ProductManager.listProducts.push(new product_1.product('s002', 'thịt', 500, 1000));
-        ProductManager.listProducts.push(new product_1.product('s003', 'cam', 10, 2000));
-        ProductManager.listProducts.push(new product_1.product('s004', 'vàng', 2000, 50));
-        ProductManager.listProducts.push(new product_1.product('s005', 'kẹo ', 5, 10000));
+        ProductManager.listProducts.push(new product_1.product('s002', 'thịt', 500, 100));
+        ProductManager.listProducts.push(new product_1.product('s003', 'cam', 10, 200));
+        ProductManager.listProducts.push(new product_1.product('s004', 'táo', 2000, 50));
+        ProductManager.listProducts.push(new product_1.product('s005', 'kẹo ', 5, 1000));
     }
     ProductManager.prototype.showList = function () {
         return ProductManager.listProducts;

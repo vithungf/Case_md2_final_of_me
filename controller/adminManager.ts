@@ -12,6 +12,10 @@ export class AdminManager {
         AdminManager.UserList.push(new User('hung12', 'Hung4', '123', 1));
         AdminManager.UserList.push(new User('lekhuyen1508', 'lệ khuyên', '123', 1));
 
+        // role = 0 => admin
+        // role = 1 => user
+
+
     }
 
     static showListUser(): User[] {

@@ -17,3 +17,5 @@ các chức năng như trên
 và khi user thanh toán thì sẽ hiện doanh thu phía admin
 
 demo:login user trc sau đến admin 
+
+còn nhiều chức năng ch hoàn thiện(khóa, mở tk, lịch sử mua hàng)

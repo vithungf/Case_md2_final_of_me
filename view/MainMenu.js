@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.MainMenu = void 0;
+var chalk = require("chalk");
 var readlineSync = require('readline-sync');
 var adminManager_1 = require("../controller/adminManager");
 var AdminMenu_1 = require("./AdminMenu");
@@ -23,7 +24,7 @@ var MainMenu = /** @class */ (function () {
                 inCorrectChoice = choice <= 0 || choice >= 4;
                 correctChoice = choice >= 1 || choice <= 3;
                 if (inCorrectChoice) {
-                    console.log(' {!!}wrong choice please try again');
+                    console.log(chalk.red(' {!!}wrong choice please try again'));
                 }
                 else {
                     switch (choice) {
@@ -37,10 +38,13 @@ var MainMenu = /** @class */ (function () {
                                 var checkLogin = adminManager_1.AdminManager.checkLogin(inputID, inputPassword);
                                 var idUnavailable = -1;
                                 if (checkLogin == idUnavailable) {
-                                    console.log('{!!}wrong id or password,please try again');
+                                    console.log(chalk.red('{!!}wrong id or password,please try again'));
+                                }
+                                else if (adminManager_1.AdminManager.UserList[adminManager_1.AdminManager.findById(inputID)].locked) {
+                                    console.log(chalk.red('{!!}Account has been locked, please contact admin for support'));
                                 }
                                 else {
-                                    console.log('-=*login success*= -');
+                                    console.log(chalk.green('-=*login success*= -'));
                                     isLoop1 = false;
                                 }
                             }

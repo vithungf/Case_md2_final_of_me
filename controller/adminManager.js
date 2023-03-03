@@ -44,17 +44,6 @@ var AdminManager = /** @class */ (function () {
             AdminManager.UserList[index] = updateUser;
         }
     };
-    // static IsLock(id: string, isLock: boolean): void {
-    //     let index = this.findById(id);
-    //     if (index !== -1) { // Kiểm tra xem tài khoản có tồn tại trong danh sách hay không
-    //         let user = AdminManager.UserList[index];
-    //         if (isLock) {
-    //             user.isLock = true; // Khóa tài khoản
-    //         } else {
-    //             AdminManager.UserList[index] = undefined; // Xóa tài khoản khỏi danh sách
-    //         }
-    //     }
-    // }
     AdminManager.checkLogin = function (id, password) {
         var checkID = this.findById(id);
         var notExist = -1;
@@ -72,6 +61,20 @@ var AdminManager = /** @class */ (function () {
             return 1;
         }
         return 0;
+    };
+    // const user = this("abc123"); // Hàm findUserById() được giả định đã được triển khai
+    // user.lock();
+    AdminManager.lockUser = function (id) {
+        var userIndex = this.UserList.findIndex(function (user) { return user.id === id; });
+        if (userIndex !== -1) {
+            this.UserList[userIndex].locked = true;
+        }
+    };
+    AdminManager.unlockUser = function (id) {
+        var userIndex = this.UserList.findIndex(function (user) { return user.id === id; });
+        if (userIndex !== -1) {
+            this.UserList[userIndex].locked = false;
+        }
     };
     AdminManager.UserList = [];
     return AdminManager;

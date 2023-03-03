@@ -5,6 +5,7 @@ import {product} from "../model/product";
 import {ProductManager} from "../controller/productManager";
 import {UserCart} from "../controller/UserCart";
 import {MainMenu} from "./MainMenu";
+const chalk = require('chalk');
 
 export class UserMenu {
 
@@ -18,8 +19,25 @@ export class UserMenu {
     3.show cart 
     4.edit cart
     5 pay cart
-    6.logout`
+    6.search by name
+    7.logout`
+    
 
+    searchByName(name = readlineSync.question('enter name need search')):void{
+        let check = 0 
+        let listProducts = new ProductManager()
+        for (let i = 0; i < listProducts.showList().length; i++){
+            if(listProducts.showList()[i].name.includes(name)){
+                console.log(listProducts.showList()[i].getinfo())
+                    check++
+            }
+        }
+            if(check === 0 ){
+                console.log(`no product name: ${name}`)
+            }
+        
+    }
+    
     userMenu(){
         let isIdExistProduct = 0;
         let isIdExistCart = 0;
@@ -27,16 +45,16 @@ export class UserMenu {
         let indexProduct = 0;
         let indexCart = 0;
         let inputQuantity = 0;
+        let listProducts = new ProductManager()
         while (true){
             console.log(this.menu)
             let choice = +readlineSync.question('-pick your choice-:')
             let inCorrectChoice : any
             let correctChoice : any
-
-            inCorrectChoice = choice <= 0 || choice >=7
-            correctChoice = choice >= 1 || choice <= 6
+            inCorrectChoice = choice <= 0 || choice >=8
+            correctChoice = choice >= 1 || choice <= 7
             if(inCorrectChoice){
-                console.log('{!!}wrong choice, please try again');
+                console.log(chalk.yellow('{!!}wrong choice, please try again'));
             }else{
             switch(choice){
                 case 1:
@@ -50,7 +68,7 @@ export class UserMenu {
                         isIdExistProduct = indexProduct = ProductManager.findById(inputID)
                         isIdExistCart = indexCart =this.userCart.findById(inputID)
                         if(isIdExistProduct == no ){
-                            console.log('{!!}this item is not exist,please try again');
+                            console.log(chalk.yellow('{!!}this item is not exist,please try again'));
                             break;
                         }else{
                             let isLoop2 = true
@@ -59,17 +77,13 @@ export class UserMenu {
                                 if (isIdExistCart){
                                     let itemProduct: any = ProductManager.checkQuantity(inputID)
                                     if (inputQuantity> itemProduct){
-                                        console.log('{!!}amount is not enough. Please try again')
+                                        console.log(chalk.red('{!!}amount is not enough. Please try again'))
                                         break;
                                     }else{
                                         this.addItemNoExistCart(inputID,inputQuantity,indexProduct)
-                                        console.log('-=* add item successfully *=-')
+                                        console.log(chalk.green('-=* add item successfully *=-'))
                                         isLoop2 = false
                                     }
-                                }else{
-                                    this.addItemExistCart(indexCart,inputQuantity,indexProduct)
-                                    console.log('-=* add item to cart success *=-')
-                                    isLoop2 = false
                                 }
                             }
                             isLoop = false
@@ -87,7 +101,7 @@ export class UserMenu {
                         let indexSupply = ProductManager.findById(inputId);
                         let notExist = -1;
                         if (indexCart == notExist) {
-                            console.log('{!!} This item is not exist in cart. please try again');
+                            console.log(chalk.red('{!!} This item is not exist in cart. please try again'));
                             break;
                         } else {
                             let inputQuantity = +readlineSync.question('Quantity: ');
@@ -97,12 +111,12 @@ export class UserMenu {
                                 let clearCart = 0;
                                 this.userCart.itemList[indexCart].quantity = clearCart;
                                 this.addItemBackProduct(indexSupply, inputQuantity);
-                                console.log('-=* Edit cart successful *=-');
+                                console.log(chalk.green('-=* Edit cart successful *=-'));
                                 isLoop3 = false;
                             } else {
                                 this.userCart.itemList[indexCart].quantity = itemInCartQuantity - inputQuantity;
                                 this.addItemBackProduct(indexSupply, inputQuantity);
-                                console.log(' -=* Edit cart successful *=-');
+                                console.log(chalk.green(' -=* Edit cart successful *=-'));
                                 isLoop3 = false;
                             }
                         }
@@ -110,12 +124,18 @@ export class UserMenu {
                     break;
                 case 5:
                     console.log('total:$' +this.userCart.bill())
-                    console.log(('-=* payment done, thanks *=-'))
+                    console.log(chalk.green('-=* payment done, thanks *=-'))
+                    break;
+                case 7:
+
+                     this.logout.mainMenu()
+                    console.log(chalk.green('-=* logout successful *=-'))
                     break;
                 case 6:
-
-                    return this.logout.mainMenu()
-            }
+                    let name = readlineSync.question('Name need search : ')
+                   this.searchByName(name)
+                    }   
+            
         }
     }
     }

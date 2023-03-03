@@ -3,7 +3,8 @@ import {AdminMenu} from "./AdminMenu";
 var readlineSync = require('readline-sync');
 import {product} from "../model/product";
 import {ProductManager} from "../controller/productManager";
-
+import { exit } from "process";
+const chalk = require('chalk');
 export class AdminMenuProductManager {
     menu = `
     ------* menu admin *------
@@ -32,7 +33,7 @@ export class AdminMenuProductManager {
             inCorrectChoice = choice <= 0 || choice >= 7;
             correctChoice = choice => 1 || choice <= 6;
             if (inCorrectChoice) {
-                console.log('{!!}wrong choice,please try again ')
+                console.log(chalk.yellow('{!!}wrong choice,please try again '))
             } else {
                 switch (choice) {
                     case 1:
@@ -49,11 +50,11 @@ export class AdminMenuProductManager {
                             inputQuantity = readlineSync.question('quantity:');
                             let newProduct = new product(inputId, inputName, inputPrice, inputQuantity)
                             ProductManager.addProduct(newProduct);
-                            console.log('-=* add product success *=-');
+                            console.log(chalk.green('-=* add product success *=-'));
                         } else {
                             inputQuantity = readlineSync.question('quantity:');
                             ProductManager.listProducts[index].quantity = ProductManager.listProducts[index].quantity + inputQuantity
-                            console.log('-=* add products success *=-');
+                            console.log(chalk.green('-=* add products success *=-'));
                         }
                         break;
                     case 3:
@@ -61,14 +62,14 @@ export class AdminMenuProductManager {
                         no = -1;
                         isIdExist = ProductManager.findById(inputId);
                         if (isIdExist == no) {
-                            console.log('{!!}this ID is not exist. pls try again')
+                            console.log(chalk.yellow('{!!}this ID is not exist. pls try again'))
                         } else {
                             inputName = readlineSync.question('name:');
                             inputPrice = readlineSync.question('price:');
                             inputQuantity = readlineSync.question('quantity:');
                             let updateProduct = new product(inputId, inputName, inputPrice, inputQuantity);
                             ProductManager.editProduct(inputId, updateProduct);
-                            console.log('-=* edit success *=-')
+                            console.log(chalk.green('-=* edit success *=-'))
                         }
                         break;
                     case 4:
@@ -76,10 +77,10 @@ export class AdminMenuProductManager {
                         no = -1;
                         isIdAvailable = ProductManager.findById(inputId);
                         if (isIdAvailable == no) {
-                            console.log('{!!}this is id not exist. pls try again');
+                            console.log(chalk.yellow('{!!}this is id not exist. pls try again'));
                         } else {
                             ProductManager.deleteProduct(inputId);
-                            console.log('-=* delete success *=-')
+                            console.log(chalk.green('-=* delete success *=-'))
                         }
                         break;
                     case 5:
@@ -88,6 +89,7 @@ export class AdminMenuProductManager {
                         break;
                     case 6:
                         return back.adminMenu();
+                        console.log(chalk.green('-=*exit success*=-'))
 
                 }
             }

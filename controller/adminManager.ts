@@ -55,17 +55,8 @@ export class AdminManager {
         }
     }
 
-    // static IsLock(id: string, isLock: boolean): void {
-    //     let index = this.findById(id);
-    //     if (index !== -1) { // Kiểm tra xem tài khoản có tồn tại trong danh sách hay không
-    //         let user = AdminManager.UserList[index];
-    //         if (isLock) {
-    //             user.isLock = true; // Khóa tài khoản
-    //         } else {
-    //             AdminManager.UserList[index] = undefined; // Xóa tài khoản khỏi danh sách
-    //         }
-    //     }
-    // }
+    
+    
 
     static checkLogin(id: string, password: string): any {
     
@@ -88,5 +79,22 @@ export class AdminManager {
         return 0
     }
 
+    // const user = this("abc123"); // Hàm findUserById() được giả định đã được triển khai
+    // user.lock();
+
+
+static lockUser(id: string): void {
+    const userIndex = this.UserList.findIndex((user) => user.id === id);
+    if (userIndex !== -1) {
+        this.UserList[userIndex].locked = true;
+    }
 }
 
+static unlockUser(id: string): void {
+    const userIndex = this.UserList.findIndex((user) => user.id === id);
+    if (userIndex !== -1) {
+        this.UserList[userIndex].locked = false;
+    }
+}
+
+}

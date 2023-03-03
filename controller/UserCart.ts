@@ -1,5 +1,6 @@
 import { product } from "../model/product";
 import { ProductManager } from "./productManager";
+import { AdminManager } from "./adminManager";
 
 export class UserCart {
     id: string;
@@ -39,6 +40,16 @@ export class UserCart {
         }
         return -1;
     }
+     findUserById(id: string) :any {
+        for (let i in AdminManager.UserList) {
+            if (id == AdminManager.UserList[i].getId()) {
+                return +i
+            }
+        }
+        return -1
+     
+        
+    }
 
     checkQuantity(id: string): number {
         let index = this.findById(id);
@@ -56,10 +67,15 @@ export class UserCart {
             total += (i.price * i.quantity);
             ProductManager.soldList.push(i)
         }
+
+        // this.findUserById(this.id).boughtCart.push(this.itemList);
+
         let clearCart: product[] = [];
         this.itemList = clearCart;
         let totalRounded = Math.round(total*100)/100;
         ProductManager.calculateRevenue(totalRounded);
         return totalRounded;
     }
+    
+    
 }

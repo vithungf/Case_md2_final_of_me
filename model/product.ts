@@ -39,4 +39,8 @@ export class product implements IProduct{
     setQuantity(quantity:number):void {
         this.quantity = quantity;
     }
+
+    getinfo(){
+        return `mã sản phẩm : ${this.id} | name: ${this.name} | price: ${this.price}|quantity: ${this.quantity}`
+    }
 }

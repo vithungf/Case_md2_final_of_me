@@ -2,6 +2,7 @@
 exports.__esModule = true;
 exports.UserCart = void 0;
 var productManager_1 = require("./productManager");
+var adminManager_1 = require("./adminManager");
 var UserCart = /** @class */ (function () {
     function UserCart(id, name, quantity, totalPrice) {
         if (id === void 0) { id = ''; }
@@ -32,6 +33,14 @@ var UserCart = /** @class */ (function () {
         }
         return -1;
     };
+    UserCart.prototype.findUserById = function (id) {
+        for (var i in adminManager_1.AdminManager.UserList) {
+            if (id == adminManager_1.AdminManager.UserList[i].getId()) {
+                return +i;
+            }
+        }
+        return -1;
+    };
     UserCart.prototype.checkQuantity = function (id) {
         var index = this.findById(id);
         var noExist = -1;
@@ -49,6 +58,7 @@ var UserCart = /** @class */ (function () {
             total += (i.price * i.quantity);
             productManager_1.ProductManager.soldList.push(i);
         }
+        // this.findUserById(this.id).boughtCart.push(this.itemList);
         var clearCart = [];
         this.itemList = clearCart;
         var totalRounded = Math.round(total * 100) / 100;

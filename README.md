@@ -15,5 +15,7 @@ gồm các chức năng
 cách hoạt động:login check role 1 là uesr,0 là admin
 các chức năng như trên
 và khi user thanh toán thì sẽ hiện doanh thu phía admin
+admin thêm sản phẩm người dùng cugx có thể xem
 
 demo:login user trc sau đến admin 
+

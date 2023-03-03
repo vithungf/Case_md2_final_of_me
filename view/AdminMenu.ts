@@ -2,7 +2,7 @@ var readlineSync = require('readline-sync');
 import { MainMenu } from "./MainMenu";
 import { AdminMenuUserManager } from "./AdminMenuUserManager";
 import {AdminMenuProductManager} from "./AdminMenuProductManager";
-
+const chalk = require('chalk')
 export class AdminMenu {
 
     adminMenuUserManager = new AdminMenuUserManager();
@@ -10,7 +10,7 @@ export class AdminMenu {
     menu = `
     ----------* Administrator Menu *----------
     1. User Manager
-    2. Supply Manager
+    2. Product Manager
     3. Logout
     `
 
@@ -27,7 +27,7 @@ export class AdminMenu {
             correctChoice = choice >= 1 || choice <= 3
             
             if(inCorrectChoice){
-                console.log('{!!} wrong choice, please try again ')
+                console.log(chalk.red('{!!} wrong choice, please try again '))
             }else{
 
             switch (choice) {
@@ -39,6 +39,7 @@ export class AdminMenu {
                     break;
                 case 3:
                     return logout.mainMenu;
+                    console.log(chalk.green('-=* logout successfully *=-'));
             }
         }
         }

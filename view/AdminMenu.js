@@ -5,11 +5,12 @@ var readlineSync = require('readline-sync');
 var MainMenu_1 = require("./MainMenu");
 var AdminMenuUserManager_1 = require("./AdminMenuUserManager");
 var AdminMenuProductManager_1 = require("./AdminMenuProductManager");
+var chalk = require('chalk');
 var AdminMenu = /** @class */ (function () {
     function AdminMenu() {
         this.adminMenuUserManager = new AdminMenuUserManager_1.AdminMenuUserManager();
         this.adminMenuSupplyManager = new AdminMenuProductManager_1.AdminMenuProductManager();
-        this.menu = "\n    ----------* Administrator Menu *----------\n    1. User Manager\n    2. Supply Manager\n    3. Logout\n    ";
+        this.menu = "\n    ----------* Administrator Menu *----------\n    1. User Manager\n    2. Product Manager\n    3. Logout\n    ";
     }
     AdminMenu.prototype.adminMenu = function () {
         var logout = new MainMenu_1.MainMenu();
@@ -21,7 +22,7 @@ var AdminMenu = /** @class */ (function () {
             inCorrectChoice = choice <= 0 || choice >= 4;
             correctChoice = choice >= 1 || choice <= 3;
             if (inCorrectChoice) {
-                console.log('{!!} wrong choice, please try again ');
+                console.log(chalk.red('{!!} wrong choice, please try again '));
             }
             else {
                 switch (choice) {
@@ -33,6 +34,7 @@ var AdminMenu = /** @class */ (function () {
                         break;
                     case 3:
                         return logout.mainMenu;
+                        console.log(chalk.green('-=* logout successfully *=-'));
                 }
             }
         }

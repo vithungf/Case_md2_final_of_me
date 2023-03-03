@@ -1,4 +1,6 @@
 import { User } from "../model/user";
+const chalk = require("chalk");
+
 
 var readlineSync = require('readline-sync');
 import { AdminManager } from "../controller/adminManager";
@@ -26,7 +28,7 @@ export class MainMenu {
             inCorrectChoice = choice <= 0 || choice >= 4
             correctChoice = choice >= 1 || choice <= 3
             if (inCorrectChoice) {
-                console.log(' {!!}wrong choice please try again');
+                console.log(chalk.red(' {!!}wrong choice please try again'));
             } else {
                 switch (choice) {
                     case 1:
@@ -39,9 +41,11 @@ export class MainMenu {
                             let checkLogin = AdminManager.checkLogin(inputID, inputPassword)
                             let idUnavailable = -1
                             if (checkLogin == idUnavailable) {
-                                console.log('{!!}wrong id or password,please try again')
+                                console.log(chalk.red('{!!}wrong id or password,please try again'))
+                            } else if (AdminManager.UserList[AdminManager.findById(inputID)].locked) {
+                                console.log(chalk.yellow('{!!}Account has been locked, please contact admin for support'))
                             } else {
-                                console.log('-=*login success*= -')
+                                console.log(chalk.green('-=*login success*= -'))
                                 isLoop1 = false
                             }
                         }
@@ -58,6 +62,7 @@ export class MainMenu {
                         let checkRole = AdminManager.UserList[indexOfID].role;
                         if (checkRole == user1) {
                             userMenu.userMenu()
+                            
                         } else {
                             adminMenu.adminMenu()
                         }
@@ -69,6 +74,7 @@ export class MainMenu {
                         break;
                     case 3:
                         return false;
+                        
                 }
             }
         }

@@ -6,12 +6,27 @@ var product_1 = require("../model/product");
 var productManager_1 = require("../controller/productManager");
 var UserCart_1 = require("../controller/UserCart");
 var MainMenu_1 = require("./MainMenu");
+var chalk = require('chalk');
 var UserMenu = /** @class */ (function () {
     function UserMenu() {
         this.userCart = new UserCart_1.UserCart('', '', 0, 0);
         this.logout = new MainMenu_1.MainMenu();
-        this.menu = "\n    ------*user menu*--------\n    1.show list\n    2.add item to cart\n    3.show cart \n    4.edit cart\n    5 pay cart\n    6.logout";
+        this.menu = "\n    ------*user menu*--------\n    1.show list\n    2.add item to cart\n    3.show cart \n    4.edit cart\n    5 pay cart\n    6.search by name\n    7.logout";
     }
+    UserMenu.prototype.searchByName = function (name) {
+        if (name === void 0) { name = readlineSync.question('enter name need search'); }
+        var check = 0;
+        var listProducts = new productManager_1.ProductManager();
+        for (var i = 0; i < listProducts.showList().length; i++) {
+            if (listProducts.showList()[i].name.includes(name)) {
+                console.log(listProducts.showList()[i].getinfo());
+                check++;
+            }
+        }
+        if (check === 0) {
+            console.log("no product name: ".concat(name));
+        }
+    };
     UserMenu.prototype.userMenu = function () {
         var isIdExistProduct = 0;
         var isIdExistCart = 0;
@@ -19,15 +34,16 @@ var UserMenu = /** @class */ (function () {
         var indexProduct = 0;
         var indexCart = 0;
         var inputQuantity = 0;
+        var listProducts = new productManager_1.ProductManager();
         while (true) {
             console.log(this.menu);
             var choice = +readlineSync.question('-pick your choice-:');
             var inCorrectChoice = void 0;
             var correctChoice = void 0;
-            inCorrectChoice = choice <= 0 || choice >= 7;
-            correctChoice = choice >= 1 || choice <= 6;
+            inCorrectChoice = choice <= 0 || choice >= 8;
+            correctChoice = choice >= 1 || choice <= 7;
             if (inCorrectChoice) {
-                console.log('{!!}wrong choice, please try again');
+                console.log(chalk.yellow('{!!}wrong choice, please try again'));
             }
             else {
                 switch (choice) {
@@ -42,7 +58,7 @@ var UserMenu = /** @class */ (function () {
                             isIdExistProduct = indexProduct = productManager_1.ProductManager.findById(inputID);
                             isIdExistCart = indexCart = this.userCart.findById(inputID);
                             if (isIdExistProduct == no) {
-                                console.log('{!!}this item is not exist,please try again');
+                                console.log(chalk.yellow('{!!}this item is not exist,please try again'));
                                 break;
                             }
                             else {
@@ -52,19 +68,14 @@ var UserMenu = /** @class */ (function () {
                                     if (isIdExistCart) {
                                         var itemProduct = productManager_1.ProductManager.checkQuantity(inputID);
                                         if (inputQuantity > itemProduct) {
-                                            console.log('{!!}amount is not enough. Please try again');
+                                            console.log(chalk.red('{!!}amount is not enough. Please try again'));
                                             break;
                                         }
                                         else {
                                             this.addItemNoExistCart(inputID, inputQuantity, indexProduct);
-                                            console.log('-=* add item successfully *=-');
+                                            console.log(chalk.green('-=* add item successfully *=-'));
                                             isLoop2 = false;
                                         }
-                                    }
-                                    else {
-                                        this.addItemExistCart(indexCart, inputQuantity, indexProduct);
-                                        console.log('-=* add item to cart success *=-');
-                                        isLoop2 = false;
                                     }
                                 }
                                 isLoop = false;
@@ -82,7 +93,7 @@ var UserMenu = /** @class */ (function () {
                             var indexSupply = productManager_1.ProductManager.findById(inputId);
                             var notExist = -1;
                             if (indexCart_1 == notExist) {
-                                console.log('{!!} This item is not exist in cart. please try again');
+                                console.log(chalk.red('{!!} This item is not exist in cart. please try again'));
                                 break;
                             }
                             else {
@@ -93,13 +104,13 @@ var UserMenu = /** @class */ (function () {
                                     var clearCart = 0;
                                     this.userCart.itemList[indexCart_1].quantity = clearCart;
                                     this.addItemBackProduct(indexSupply, inputQuantity_1);
-                                    console.log('-=* Edit cart successful *=-');
+                                    console.log(chalk.green('-=* Edit cart successful *=-'));
                                     isLoop3 = false;
                                 }
                                 else {
                                     this.userCart.itemList[indexCart_1].quantity = itemInCartQuantity - inputQuantity_1;
                                     this.addItemBackProduct(indexSupply, inputQuantity_1);
-                                    console.log(' -=* Edit cart successful *=-');
+                                    console.log(chalk.green(' -=* Edit cart successful *=-'));
                                     isLoop3 = false;
                                 }
                             }
@@ -107,10 +118,15 @@ var UserMenu = /** @class */ (function () {
                         break;
                     case 5:
                         console.log('total:$' + this.userCart.bill());
-                        console.log(('-=* payment done, thanks *=-'));
+                        console.log(chalk.green('-=* payment done, thanks *=-'));
+                        break;
+                    case 7:
+                        this.logout.mainMenu();
+                        console.log(chalk.green('-=* logout successful *=-'));
                         break;
                     case 6:
-                        return this.logout.mainMenu();
+                        var name_1 = readlineSync.question('Name need search : ');
+                        this.searchByName(name_1);
                 }
             }
         }

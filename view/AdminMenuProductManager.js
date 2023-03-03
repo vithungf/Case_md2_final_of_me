@@ -5,6 +5,7 @@ var AdminMenu_1 = require("./AdminMenu");
 var readlineSync = require('readline-sync');
 var product_1 = require("../model/product");
 var productManager_1 = require("../controller/productManager");
+var chalk = require('chalk');
 var AdminMenuProductManager = /** @class */ (function () {
     function AdminMenuProductManager() {
         this.menu = "\n    ------* menu admin *------\n        1.show List Products\n        2.add Product\n        3.edit Product\n        4.delete Product\n        5.Revenue Product\n        6.exit";
@@ -26,7 +27,7 @@ var AdminMenuProductManager = /** @class */ (function () {
             inCorrectChoice = choice <= 0 || choice >= 7;
             correctChoice = function (choice) { return 1 || choice <= 6; };
             if (inCorrectChoice) {
-                console.log('{!!}wrong choice,please try again ');
+                console.log(chalk.yellow('{!!}wrong choice,please try again '));
             }
             else {
                 switch (choice) {
@@ -44,12 +45,12 @@ var AdminMenuProductManager = /** @class */ (function () {
                             inputQuantity = readlineSync.question('quantity:');
                             var newProduct = new product_1.product(inputId, inputName, inputPrice, inputQuantity);
                             productManager_1.ProductManager.addProduct(newProduct);
-                            console.log('-=* add product success *=-');
+                            console.log(chalk.green('-=* add product success *=-'));
                         }
                         else {
                             inputQuantity = readlineSync.question('quantity:');
                             productManager_1.ProductManager.listProducts[index].quantity = productManager_1.ProductManager.listProducts[index].quantity + inputQuantity;
-                            console.log('-=* add products success *=-');
+                            console.log(chalk.green('-=* add products success *=-'));
                         }
                         break;
                     case 3:
@@ -57,7 +58,7 @@ var AdminMenuProductManager = /** @class */ (function () {
                         no = -1;
                         isIdExist = productManager_1.ProductManager.findById(inputId);
                         if (isIdExist == no) {
-                            console.log('{!!}this ID is not exist. pls try again');
+                            console.log(chalk.yellow('{!!}this ID is not exist. pls try again'));
                         }
                         else {
                             inputName = readlineSync.question('name:');
@@ -65,7 +66,7 @@ var AdminMenuProductManager = /** @class */ (function () {
                             inputQuantity = readlineSync.question('quantity:');
                             var updateProduct = new product_1.product(inputId, inputName, inputPrice, inputQuantity);
                             productManager_1.ProductManager.editProduct(inputId, updateProduct);
-                            console.log('-=* edit success *=-');
+                            console.log(chalk.green('-=* edit success *=-'));
                         }
                         break;
                     case 4:
@@ -73,11 +74,11 @@ var AdminMenuProductManager = /** @class */ (function () {
                         no = -1;
                         isIdAvailable = productManager_1.ProductManager.findById(inputId);
                         if (isIdAvailable == no) {
-                            console.log('{!!}this is id not exist. pls try again');
+                            console.log(chalk.yellow('{!!}this is id not exist. pls try again'));
                         }
                         else {
                             productManager_1.ProductManager.deleteProduct(inputId);
-                            console.log('-=* delete success *=-');
+                            console.log(chalk.green('-=* delete success *=-'));
                         }
                         break;
                     case 5:
@@ -86,6 +87,7 @@ var AdminMenuProductManager = /** @class */ (function () {
                         break;
                     case 6:
                         return back.adminMenu();
+                        console.log(chalk.green('-=*exit success*=-'));
                 }
             }
         } while (correctChoice);

@@ -32,6 +32,9 @@ var product = /** @class */ (function () {
     product.prototype.setQuantity = function (quantity) {
         this.quantity = quantity;
     };
+    product.prototype.getinfo = function () {
+        return "m\u00E3 s\u1EA3n ph\u1EA9m : ".concat(this.id, " | name: ").concat(this.name, " | price: ").concat(this.price, "|quantity: ").concat(this.quantity);
+    };
     return product;
 }());
 exports.product = product;

@@ -59,4 +59,18 @@ static listProducts: product[] = [];
             return -1;
         }
     }
-}
+    static searchByName(name: string): product[] {
+        const matchingProducts: product[] = [];
+        for (let i = 0; i < ProductManager.listProducts.length; i++) {
+          if (ProductManager.listProducts[i].name.includes(name)) {
+            matchingProducts.push(ProductManager.listProducts[i]);
+          }
+        }
+        if (matchingProducts.length === 0) {
+          console.log(`No products found with name: ${name}`);
+        }
+        return matchingProducts;
+      }
+      
+        
+    }

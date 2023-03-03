@@ -4,9 +4,9 @@ import {MainMenu} from "./view/MainMenu";
 import { AdminMenuProductManager } from "./view/AdminMenuProductManager";
 
 
-// let productManager = new ProductManager();
+let productManager = new ProductManager();
 
-// let adminManager = new AdminManager();
+let adminManager = new AdminManager();
 
 let login = new MainMenu();
 login.mainMenu()

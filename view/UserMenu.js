@@ -11,22 +11,8 @@ var UserMenu = /** @class */ (function () {
     function UserMenu() {
         this.userCart = new UserCart_1.UserCart('', '', 0, 0);
         this.logout = new MainMenu_1.MainMenu();
-        this.menu = "\n    ------*user menu*--------\n    1.show list\n    2.add item to cart\n    3.show cart \n    4.edit cart\n    5 pay cart\n    6.search by name\n    7.logout";
+        this.menu = "\n    ------*user menu*--------\n    1.show list\n    2.add item to cart\n    3.show cart \n    4.edit cart\n    5 pay cart\n    6.search by name\n    7.history\n    8.logout";
     }
-    UserMenu.prototype.searchByName = function (name) {
-        if (name === void 0) { name = readlineSync.question('enter name need search'); }
-        var check = 0;
-        var listProducts = new productManager_1.ProductManager();
-        for (var i = 0; i < listProducts.showList().length; i++) {
-            if (listProducts.showList()[i].name.includes(name)) {
-                console.log(listProducts.showList()[i].getinfo());
-                check++;
-            }
-        }
-        if (check === 0) {
-            console.log("no product name: ".concat(name));
-        }
-    };
     UserMenu.prototype.userMenu = function () {
         var isIdExistProduct = 0;
         var isIdExistCart = 0;
@@ -34,14 +20,14 @@ var UserMenu = /** @class */ (function () {
         var indexProduct = 0;
         var indexCart = 0;
         var inputQuantity = 0;
-        var listProducts = new productManager_1.ProductManager();
+        // let listProducts = new ProductManager()
         while (true) {
             console.log(this.menu);
             var choice = +readlineSync.question('-pick your choice-:');
             var inCorrectChoice = void 0;
             var correctChoice = void 0;
-            inCorrectChoice = choice <= 0 || choice >= 8;
-            correctChoice = choice >= 1 || choice <= 7;
+            inCorrectChoice = choice <= 0 || choice >= 9;
+            correctChoice = choice >= 1 || choice <= 8;
             if (inCorrectChoice) {
                 console.log(chalk.yellow('{!!}wrong choice, please try again'));
             }
@@ -120,13 +106,25 @@ var UserMenu = /** @class */ (function () {
                         console.log('total:$' + this.userCart.bill());
                         console.log(chalk.green('-=* payment done, thanks *=-'));
                         break;
+                    case 6:
+                        var name_1 = readlineSync.question('Name to search: ');
+                        var foundProducts = productManager_1.ProductManager.searchByName(name_1);
+                        if (foundProducts.length === 0) {
+                            console.log(chalk.yellow('{!!} No products found with that name.'));
+                        }
+                        else {
+                            console.log(chalk.green('=== Products Found ==='));
+                            console.table(foundProducts);
+                        }
+                        break;
                     case 7:
+                        console.table(productManager_1.ProductManager.soldList);
+                        console.log('total money pay:$' + productManager_1.ProductManager.showRevenue());
+                        break;
+                    case 8:
                         this.logout.mainMenu();
                         console.log(chalk.green('-=* logout successful *=-'));
                         break;
-                    case 6:
-                        var name_1 = readlineSync.question('Name need search : ');
-                        this.searchByName(name_1);
                 }
             }
         }

@@ -56,6 +56,18 @@ var ProductManager = /** @class */ (function () {
             return -1;
         }
     };
+    ProductManager.searchByName = function (name) {
+        var matchingProducts = [];
+        for (var i = 0; i < ProductManager.listProducts.length; i++) {
+            if (ProductManager.listProducts[i].name.includes(name)) {
+                matchingProducts.push(ProductManager.listProducts[i]);
+            }
+        }
+        if (matchingProducts.length === 0) {
+            console.log("No products found with name: ".concat(name));
+        }
+        return matchingProducts;
+    };
     ProductManager.listProducts = [];
     ProductManager.soldList = [];
     ProductManager.revenue = 0;

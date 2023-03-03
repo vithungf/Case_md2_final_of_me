@@ -20,23 +20,10 @@ export class UserMenu {
     4.edit cart
     5 pay cart
     6.search by name
-    7.logout`
-    
+    7.history
+    8.logout`
 
-    searchByName(name = readlineSync.question('enter name need search')):void{
-        let check = 0 
-        let listProducts = new ProductManager()
-        for (let i = 0; i < listProducts.showList().length; i++){
-            if(listProducts.showList()[i].name.includes(name)){
-                console.log(listProducts.showList()[i].getinfo())
-                    check++
-            }
-        }
-            if(check === 0 ){
-                console.log(`no product name: ${name}`)
-            }
-        
-    }
+    
     
     userMenu(){
         let isIdExistProduct = 0;
@@ -45,14 +32,15 @@ export class UserMenu {
         let indexProduct = 0;
         let indexCart = 0;
         let inputQuantity = 0;
-        let listProducts = new ProductManager()
+        // let listProducts = new ProductManager()
+        
         while (true){
             console.log(this.menu)
             let choice = +readlineSync.question('-pick your choice-:')
             let inCorrectChoice : any
             let correctChoice : any
-            inCorrectChoice = choice <= 0 || choice >=8
-            correctChoice = choice >= 1 || choice <= 7
+            inCorrectChoice = choice <= 0 || choice >=9
+            correctChoice = choice >= 1 || choice <= 8
             if(inCorrectChoice){
                 console.log(chalk.yellow('{!!}wrong choice, please try again'));
             }else{
@@ -126,16 +114,30 @@ export class UserMenu {
                     console.log('total:$' +this.userCart.bill())
                     console.log(chalk.green('-=* payment done, thanks *=-'))
                     break;
-                case 7:
-
-                     this.logout.mainMenu()
-                    console.log(chalk.green('-=* logout successful *=-'))
-                    break;
+                
                 case 6:
-                    let name = readlineSync.question('Name need search : ')
-                   this.searchByName(name)
-                    }   
-            
+                    let name = readlineSync.question('Name to search: ');
+                    let foundProducts = ProductManager.searchByName(name);
+                    if (foundProducts.length === 0) {
+                         console.log(chalk.yellow('{!!} No products found with that name.'));
+                    } else {
+                          console.log(chalk.yellow('{!!} Products Found'));
+                            console.table(foundProducts);
+                     }
+                     break;
+
+               
+                case 7:
+                    console.table(ProductManager.soldList)
+                        console.log('total money pay:$' + ProductManager.showRevenue());
+                        break;  
+                        
+                case 8:
+
+                        this.logout.mainMenu()
+                       console.log(chalk.green('-=* logout successful *=-'))
+                       break;
+                    }  
         }
     }
     }

@@ -134,7 +134,7 @@ export class AdminMenuUserManager {
                          break;
                             }
                  case 6:
-                                inputId = readlineSync.question('ID:');
+                                inputId = readlineSync.question('input user ID to un:');
                                 isIdExist = AdminManager.findById(inputId);
                             
                                 if (isIdExist == no) {

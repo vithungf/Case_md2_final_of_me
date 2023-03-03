@@ -34,7 +34,6 @@ var AdminMenu = /** @class */ (function () {
                         break;
                     case 3:
                         return logout.mainMenu;
-                        console.log(chalk.green('-=* logout successfully *=-'));
                 }
             }
         }

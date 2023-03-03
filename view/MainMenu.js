@@ -41,7 +41,7 @@ var MainMenu = /** @class */ (function () {
                                     console.log(chalk.red('{!!}wrong id or password,please try again'));
                                 }
                                 else if (adminManager_1.AdminManager.UserList[adminManager_1.AdminManager.findById(inputID)].locked) {
-                                    console.log(chalk.red('{!!}Account has been locked, please contact admin for support'));
+                                    console.log(chalk.yellow('{!!}Account has been locked, please contact admin for support'));
                                 }
                                 else {
                                     console.log(chalk.green('-=*login success*= -'));

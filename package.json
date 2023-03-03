@@ -4,6 +4,7 @@
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18"
+    "@types/node": "^18.11.18",
+    "prettier": "2.8.4"
   }
 }

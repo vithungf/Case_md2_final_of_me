@@ -39,7 +39,6 @@ export class AdminMenu {
                     break;
                 case 3:
                     return logout.mainMenu;
-                    console.log(chalk.green('-=* logout successfully *=-'));
             }
         }
         }

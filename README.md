@@ -19,4 +19,4 @@ admin thêm sản phẩm người dùng cugx có thể xem
 
 demo:login user trc sau đến admin 
 
-còn nhiều chức năng ch hoàn thiện(khóa, mở tk, lịch sử mua hàng)
+còn nhiều chức năng ch hoàn thiện(tìm kiếm theo khoảng giá, lịch sử mua hàng)

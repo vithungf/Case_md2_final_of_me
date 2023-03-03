@@ -127,7 +127,7 @@ var AdminMenuUserManager = /** @class */ (function () {
                         break;
                     }
                 case 6:
-                    inputId = readlineSync.question('ID:');
+                    inputId = readlineSync.question('input user ID to un:');
                     isIdExist = adminManager_1.AdminManager.findById(inputId);
                     if (isIdExist == no) {
                         console.log(chalk.red('{!!}this id not exist, please try again'));

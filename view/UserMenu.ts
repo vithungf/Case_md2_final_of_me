@@ -54,7 +54,7 @@ export class UserMenu {
                     let isLoop = true;
                     while(isLoop){
                         isIdExistProduct = indexProduct = ProductManager.findById(inputID)
-                        isIdExistCart = indexCart =this.userCart.findById(inputID)
+                        isIdExistCart = indexCart = this.userCart.findById(inputID)
                         if(isIdExistProduct == no ){
                             console.log(chalk.yellow('{!!}this item is not exist,please try again'));
                             break;
@@ -121,7 +121,7 @@ export class UserMenu {
                     if (foundProducts.length === 0) {
                          console.log(chalk.yellow('{!!} No products found with that name.'));
                     } else {
-                          console.log(chalk.yellow('{!!} Products Found'));
+                          console.log(chalk.green(' Products need Found :'));
                             console.table(foundProducts);
                      }
                      break;

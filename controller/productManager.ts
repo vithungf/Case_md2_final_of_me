@@ -22,7 +22,7 @@ static listProducts: product[] = [];
     static calculateRevenue(total:number){
         ProductManager.revenue = ProductManager.revenue += total
     }
-    static addProduct(newProduct:product):void {
+    static addProduct(newProduct:product):void { 
         ProductManager.listProducts.push(newProduct)
     }
     static editProduct(id:string,updateItem:product):void{

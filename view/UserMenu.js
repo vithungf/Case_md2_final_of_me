@@ -113,7 +113,7 @@ var UserMenu = /** @class */ (function () {
                             console.log(chalk.yellow('{!!} No products found with that name.'));
                         }
                         else {
-                            console.log(chalk.green('=== Products Found ==='));
+                            console.log(chalk.green(' Products need Found :'));
                             console.table(foundProducts);
                         }
                         break;

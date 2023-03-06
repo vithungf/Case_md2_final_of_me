@@ -12,7 +12,7 @@ export class AdminMenuProductManager {
         2.add Product
         3.edit Product
         4.delete Product
-        5.Revenue Product
+        5.Revenue Product 
         6.exit`
 
     AdminMenuProductManager() {

@@ -8,7 +8,7 @@ var productManager_1 = require("../controller/productManager");
 var chalk = require('chalk');
 var AdminMenuProductManager = /** @class */ (function () {
     function AdminMenuProductManager() {
-        this.menu = "\n    ------* menu admin *------\n        1.show List Products\n        2.add Product\n        3.edit Product\n        4.delete Product\n        5.Revenue Product\n        6.exit";
+        this.menu = "\n    ------* menu admin *------\n        1.show List Products\n        2.add Product\n        3.edit Product\n        4.delete Product\n        5.Revenue Product \n        6.exit";
     }
     AdminMenuProductManager.prototype.AdminMenuProductManager = function () {
         var inCorrectChoice;

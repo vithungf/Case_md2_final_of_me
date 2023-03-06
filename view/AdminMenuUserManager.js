@@ -66,7 +66,7 @@ var AdminMenuUserManager = /** @class */ (function () {
                             break;
                         }
                         else {
-                            console.log(chalk.red('wrong password,please try again'));
+                            console.log(chalk.red('{!!}wrong password,please try again'));
                             continue;
                         }
                     }

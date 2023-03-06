@@ -134,7 +134,7 @@ export class AdminMenuUserManager {
                          break;
                             }
                  case 6:
-                                inputId = readlineSync.question('input user ID to un:');
+                                inputId = readlineSync.question('input user ID to unlock:');
                                 isIdExist = AdminManager.findById(inputId);
                             
                                 if (isIdExist == no) {
@@ -147,14 +147,10 @@ export class AdminMenuUserManager {
                                     this.adminMenuManager();
                                     break;
                                 }
-                                        
-
-                
-
             case 7:
                  return back.adminMenu
                  console.log(chalk.green('-=* exit successfully*=-'))
         }
     }
-}
+  }
 }  

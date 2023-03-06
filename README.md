@@ -4,7 +4,7 @@ gồm các chức năng
 
 1 login,register,exit
 
-2 đối với admin gồm có: quản lí người dùng(thêm sửa xóa showlist,khóa và mở khóa user)
+2 đối với admin gồm có: quản lí người dùng(thêm sửa xóa showlist,khóa và mở khóa user){add min add thêm vào list proddcut sẽ thêm số lượng vào }
                         quản lí sản phẩm(CRUD sản phẩm, doanh thu)
 3 đối với user gồm: show list sản phẩm 
                     thêm vào giỏ hàng 

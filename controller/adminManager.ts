@@ -58,19 +58,22 @@ export class AdminManager {
     
     
 
-    static checkLogin(id: string, password: string): any {
-    
-        let checkID = this.findById(id);      
+    static checkLogin(id: string, password: string): number {
+        const checkID = this.findById(id);
         let notExist = -1
-        if (checkID !== notExist) {
-            for (let i in AdminManager.UserList[checkID]) {
-                if (password == AdminManager.UserList[checkID].getPassword()) {
-                    return +i
-                }
-            }
-            return -1
+        if (checkID === notExist) { 
+            // user with the given id doesn't exist
+            return -1;
         }
+        const user = AdminManager.UserList[checkID];
+        if (user.getPassword() !== password) {
+            // password doesn't match
+            return -1;
+        }
+        // user and password are correct, return the user's index
+        return checkID;
     }
+    
 
     static checkAdmin(user: User): number {
         if (user.role == 1) {
@@ -83,7 +86,7 @@ export class AdminManager {
     // user.lock();
 
 
-static lockUser(id: string): void {
+  static lockUser(id: string): void {
     const userIndex = this.UserList.findIndex((user) => user.id === id);
     if (userIndex !== -1) {
         this.UserList[userIndex].locked = true;

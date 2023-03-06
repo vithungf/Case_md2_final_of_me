@@ -7,7 +7,7 @@ static listProducts: product[] = [];
     static revenue = 0;
 
     constructor(){
-        ProductManager.listProducts.push(new product('s001', 'hoa tươi', 1000, 100))
+        ProductManager.listProducts.push(new product('s001', 'hoa tươi', 1000, 100)) //id,name,price,quantity
         ProductManager.listProducts.push(new product('s002', 'thịt', 500, 100))
         ProductManager.listProducts.push(new product('s003', 'cam', 10, 200))
         ProductManager.listProducts.push(new product('s004', 'táo', 2000, 50))

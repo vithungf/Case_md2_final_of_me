@@ -47,14 +47,17 @@ var AdminManager = /** @class */ (function () {
     AdminManager.checkLogin = function (id, password) {
         var checkID = this.findById(id);
         var notExist = -1;
-        if (checkID !== notExist) {
-            for (var i in AdminManager.UserList[checkID]) {
-                if (password == AdminManager.UserList[checkID].getPassword()) {
-                    return +i;
-                }
-            }
+        if (checkID === notExist) {
+            // user with the given id doesn't exist
             return -1;
         }
+        var user = AdminManager.UserList[checkID];
+        if (user.getPassword() !== password) {
+            // password doesn't match
+            return -1;
+        }
+        // user and password are correct, return the user's index
+        return checkID;
     };
     AdminManager.checkAdmin = function (user) {
         if (user.role == 1) {

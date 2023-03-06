@@ -40,22 +40,24 @@ export class AdminMenuProductManager {
                         console.table(ProductManager.listProducts);
                         break;
                     case 2:
-                        inputId = readlineSync.question('id:');
+                        inputId = readlineSync.question('Input id: ');
                         isIdExist = ProductManager.findById(inputId);
-                        let index = isIdExist;
-                        no = -1
-                        if (isIdExist == no) {
-                            inputName = readlineSync.question('name:');
-                            inputPrice = readlineSync.question('price:');
-                            inputQuantity = readlineSync.question('quantity:');
-                            let newProduct = new product(inputId, inputName, inputPrice, inputQuantity)
-                            ProductManager.addProduct(newProduct);
-                            console.log(chalk.green('-=* add product success *=-'));
+                        no = -1;
+                        
+                        if (isIdExist === no) {
+                          inputName = readlineSync.question('Name: ');
+                          inputPrice = +readlineSync.question('Price: ');
+                          inputQuantity = +readlineSync.question('Quantity: ');
+                          let newProduct = new product(inputId, inputName, inputPrice, inputQuantity);
+                          ProductManager.addProduct(newProduct);
+                          console.log(chalk.green('-=* Add product success *=-'));
                         } else {
-                            inputQuantity = readlineSync.question('quantity:');
-                            ProductManager.listProducts[index].quantity = ProductManager.listProducts[index].quantity + inputQuantity
-                            console.log(chalk.green('-=* add products success *=-'));
+                          inputQuantity = +readlineSync.question('Quantity +: ');
+                          let productToUpdate = ProductManager.listProducts[isIdExist];
+                          productToUpdate.quantity += inputQuantity;
+                          console.log(chalk.green('-=* Add products success *=-'));
                         }
+                        
                         break;
                     case 3:
                         inputId = readlineSync.question('id:');
@@ -64,9 +66,9 @@ export class AdminMenuProductManager {
                         if (isIdExist == no) {
                             console.log(chalk.yellow('{!!}this ID is not exist. pls try again'))
                         } else {
-                            inputName = readlineSync.question('name:');
-                            inputPrice = readlineSync.question('price:');
-                            inputQuantity = readlineSync.question('quantity:');
+                            inputName = readlineSync.question('new name:');
+                            inputPrice = readlineSync.question('new price:');
+                            inputQuantity = readlineSync.question('new quantity:');
                             let updateProduct = new product(inputId, inputName, inputPrice, inputQuantity);
                             ProductManager.editProduct(inputId, updateProduct);
                             console.log(chalk.green('-=* edit success *=-'))
@@ -95,7 +97,5 @@ export class AdminMenuProductManager {
             }
 
         } while (correctChoice)
-    }
-
-
+    } 
 }

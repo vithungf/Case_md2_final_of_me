@@ -27,12 +27,12 @@ var Register = /** @class */ (function () {
                     isLoop = false;
                 }
                 else {
-                    console.log(chalk.red('[!!!] This ID is unavailable. Please try again'));
+                    console.log(chalk.red('{!!} This ID is unavailable. Please try again'));
                     continue;
                 }
             }
             else {
-                console.log(chalk.red('[!!!] Wrong type of ID. Please try again'));
+                console.log(chalk.red('{!!} Wrong type of ID. Please try again'));
                 continue;
             }
         }
@@ -43,11 +43,11 @@ var Register = /** @class */ (function () {
             if (this.passwordValidate.Validate(inputPassword)) {
                 var inputName = readlineSync.question('Name: ');
                 newUser = new user_1.User(inputId, inputName, inputPassword);
-                console.log(chalk.green('[v] Signup successful'));
+                console.log(chalk.green('register successful'));
                 return newUser;
             }
             else {
-                console.log(chalk.red('[!!!] Wrong type of password. Please try again'));
+                console.log(chalk.red('{!!} Wrong type of password. Please try again'));
                 continue;
             }
         }

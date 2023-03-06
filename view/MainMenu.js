@@ -33,7 +33,7 @@ var MainMenu = /** @class */ (function () {
                             var userMenu = new UserMenu_1.UserMenu;
                             var isLoop1 = true;
                             while (isLoop1) {
-                                inputID = readlineSync.question('User Name(ID):');
+                                inputID = readlineSync.question('(ID):');
                                 inputPassword = readlineSync.question('password:');
                                 var checkLogin = adminManager_1.AdminManager.checkLogin(inputID, inputPassword);
                                 var idUnavailable = -1;
@@ -55,9 +55,11 @@ var MainMenu = /** @class */ (function () {
                             var checkRole = adminManager_1.AdminManager.UserList[indexOfID].role;
                             if (checkRole == user1) {
                                 userMenu.userMenu();
+                                console.log("welcome user ".concat(user1));
                             }
                             else {
                                 adminMenu.adminMenu();
+                                console.log('welcome admin');
                             }
                             break;
                         case 2:

@@ -35,22 +35,22 @@ var AdminMenuProductManager = /** @class */ (function () {
                         console.table(productManager_1.ProductManager.listProducts);
                         break;
                     case 2:
-                        inputId = readlineSync.question('id:');
+                        inputId = readlineSync.question('Input id: ');
                         isIdExist = productManager_1.ProductManager.findById(inputId);
-                        var index = isIdExist;
                         no = -1;
-                        if (isIdExist == no) {
-                            inputName = readlineSync.question('name:');
-                            inputPrice = readlineSync.question('price:');
-                            inputQuantity = readlineSync.question('quantity:');
+                        if (isIdExist === no) {
+                            inputName = readlineSync.question('Name: ');
+                            inputPrice = +readlineSync.question('Price: ');
+                            inputQuantity = +readlineSync.question('Quantity: ');
                             var newProduct = new product_1.product(inputId, inputName, inputPrice, inputQuantity);
                             productManager_1.ProductManager.addProduct(newProduct);
-                            console.log(chalk.green('-=* add product success *=-'));
+                            console.log(chalk.green('-=* Add product success *=-'));
                         }
                         else {
-                            inputQuantity = readlineSync.question('quantity:');
-                            productManager_1.ProductManager.listProducts[index].quantity = productManager_1.ProductManager.listProducts[index].quantity + inputQuantity;
-                            console.log(chalk.green('-=* add products success *=-'));
+                            inputQuantity = +readlineSync.question('Quantity: ');
+                            var productToUpdate = productManager_1.ProductManager.listProducts[isIdExist];
+                            productToUpdate.quantity += inputQuantity;
+                            console.log(chalk.green('-=* Add products success *=-'));
                         }
                         break;
                     case 3:

@@ -36,7 +36,7 @@ export class MainMenu {
                         let userMenu = new UserMenu;
                         let isLoop1 = true;
                         while (isLoop1) {
-                            inputID = readlineSync.question('User Name(ID):')
+                            inputID = readlineSync.question('(ID):')
                             inputPassword = readlineSync.question('password:')
                             let checkLogin = AdminManager.checkLogin(inputID, inputPassword)
                             let idUnavailable = -1
@@ -62,9 +62,11 @@ export class MainMenu {
                         let checkRole = AdminManager.UserList[indexOfID].role;
                         if (checkRole == user1) {
                             userMenu.userMenu()
+                            console.log(`welcome user ${user1}`);
                             
                         } else {
                             adminMenu.adminMenu()
+                            console.log('welcome admin');
                         }
                         break;
                     case 2:
@@ -79,5 +81,4 @@ export class MainMenu {
             }
         }
     }
-
 } 

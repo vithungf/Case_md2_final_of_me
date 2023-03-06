@@ -29,7 +29,7 @@ var UserMenu = /** @class */ (function () {
             inCorrectChoice = choice <= 0 || choice >= 9;
             correctChoice = choice >= 1 || choice <= 8;
             if (inCorrectChoice) {
-                console.log(chalk.yellow('{!!}wrong choice, please try again'));
+                console.log(chalk.red('{!!}wrong choice, please try again'));
             }
             else {
                 switch (choice) {
@@ -110,7 +110,7 @@ var UserMenu = /** @class */ (function () {
                         var name_1 = readlineSync.question('Name to search: ');
                         var foundProducts = productManager_1.ProductManager.searchByName(name_1);
                         if (foundProducts.length === 0) {
-                            console.log(chalk.yellow('{!!} No products found with that name.'));
+                            console.log(chalk.red('{!!} No products found with that name.'));
                         }
                         else {
                             console.log(chalk.green(' Products need Found :'));

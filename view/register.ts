@@ -25,11 +25,11 @@ export class Register {
                 if (isIdAvailable == yes) {
                     isLoop = false;
                 } else {
-                    console.log(chalk.red('[!!!] This ID is unavailable. Please try again'));
+                    console.log(chalk.red('{!!} This ID is unavailable. Please try again'));
                     continue;
                 }
             } else {
-                console.log(chalk.red('[!!!] Wrong type of ID. Please try again'));
+                console.log(chalk.red('{!!} Wrong type of ID. Please try again'));
                 continue;
             }
         }
@@ -41,11 +41,11 @@ export class Register {
             if (this.passwordValidate.Validate(inputPassword)) {
                 let inputName = readlineSync.question('Name: ');
                 newUser = new User(inputId, inputName, inputPassword);
-                console.log(chalk.green('[v] Signup successful'))
+                console.log(chalk.green('register successful'))
                 return newUser;
 
             } else {
-                console.log(chalk.red('[!!!] Wrong type of password. Please try again'));
+                console.log(chalk.red('{!!} Wrong type of password. Please try again'));
                 continue;
             }
         }
